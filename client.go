@@ -19,8 +19,9 @@ const (
 )
 
 const (
-	APIActionGetMeasure  = "getmeas"
-	APIActionGetActivity = "getactivity"
+	APIActionGetMeasure          = "getmeas"
+	APIActionGetActivity         = "getactivity"
+	APIActionGetIntraDayActivity = "getintradayactivity"
 )
 
 type Client struct {

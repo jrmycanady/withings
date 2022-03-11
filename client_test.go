@@ -200,14 +200,11 @@ func TestClient_GetActivity(t *testing.T) {
 		expectedGroupCount    int
 		expectedTotalMeasures int
 	}{
-		"Retrieve unbound weights only": {
+		"Retrieve unbound": {
 			param: withings.GetActivityParam{
 				LastUpdate: time.Now().Add(-24 * time.Hour),
 			},
 		},
-		//"Retrieve unbound all measurements": {
-		//	param: withings.GetMeasureParam{},
-		//},
 	}
 
 	for name, test := range tests {
@@ -215,6 +212,37 @@ func TestClient_GetActivity(t *testing.T) {
 			resp, err := client.GetActivity(context.Background(), *demoToken, test.param)
 			require.Nil(t, err)
 			require.Equal(t, int64(0), resp.Status)
+		})
+	}
+
+}
+
+func TestClient_GetIntraDayActivity(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param  withings.GetIntraDayActivityParam
+		status int64
+	}{
+		"Retrieve unbound": {
+			param: withings.GetIntraDayActivityParam{
+				DataFields: withings.IntraDayActivityFields{
+					withings.IntraDayActivityFieldCalories,
+				},
+			},
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetIntraDayActivity(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+			assert.Greater(t, len(resp.Body.Series), 0)
 		})
 	}
 

@@ -124,7 +124,7 @@ func (p *GetActivityParam) UpdateQuery(q url.Values) url.Values {
 func (c *Client) GetActivity(ctx context.Context, token AccessToken, param GetActivityParam) (*GetActivityResp, error) {
 
 	// Construct authorized request to request data from the API.
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, APIPathGetActivity, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, APIPathGetV2Measure, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build http request: %w", err)
 	}
