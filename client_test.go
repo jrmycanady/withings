@@ -247,3 +247,34 @@ func TestClient_GetIntraDayActivity(t *testing.T) {
 	}
 
 }
+
+func TestClient_GetWorkout(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param  withings.GetWorkoutParam
+		status int64
+	}{
+		"Retrieve unbound": {
+			param: withings.GetWorkoutParam{
+				DataFields: withings.WorkoutDataFields{
+					withings.WorkoutDataFieldCalories,
+				},
+			},
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetWorkout(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+			assert.Greater(t, len(resp.Body.Series), 0)
+		})
+	}
+
+}

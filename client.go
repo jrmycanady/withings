@@ -22,6 +22,7 @@ const (
 	APIActionGetMeasure          = "getmeas"
 	APIActionGetActivity         = "getactivity"
 	APIActionGetIntraDayActivity = "getintradayactivity"
+	APIActionGetWorkout          = "getworkouts"
 )
 
 type Client struct {
