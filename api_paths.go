@@ -5,4 +5,5 @@ const (
 	APIPathUserAccessToken = "https://wbsapi.withings.net/v2/oauth2"
 	APIPathGetMeas         = "https://wbsapi.withings.net/measure"
 	APIPathGetV2Measure    = "https://wbsapi.withings.net/v2/measure"
+	APIHeartV2             = "https://wbsapi.withings.net/v2/heart"
 )

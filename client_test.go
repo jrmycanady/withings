@@ -278,3 +278,32 @@ func TestClient_GetWorkout(t *testing.T) {
 	}
 
 }
+
+func TestClient_GetHeartData(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param  withings.GetHeartListParam
+		status int64
+	}{
+		"Retrieve unbound": {
+			param: withings.GetHeartListParam{
+				StartDate: timePtr(time.Unix(1594159644-1000, 0)),
+				EndDate:   timePtr(time.Now()),
+			},
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetHeartList(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+		})
+	}
+
+}

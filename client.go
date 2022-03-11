@@ -23,6 +23,8 @@ const (
 	APIActionGetActivity         = "getactivity"
 	APIActionGetIntraDayActivity = "getintradayactivity"
 	APIActionGetWorkout          = "getworkouts"
+	APIActionGetHeartList        = "list"
+	APIActionGetHeartGet         = "get"
 )
 
 type Client struct {
