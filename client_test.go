@@ -245,7 +245,6 @@ func TestClient_GetIntraDayActivity(t *testing.T) {
 			assert.Greater(t, len(resp.Body.Series), 0)
 		})
 	}
-
 }
 
 func TestClient_GetWorkout(t *testing.T) {
