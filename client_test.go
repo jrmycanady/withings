@@ -119,14 +119,6 @@ func TestClient_GetAuthenticationRequestURL(t *testing.T) {
 
 }
 
-//
-//func TestClient_GetDemoAccessToken(t *testing.T) {
-//	t.Parallel()
-//
-//	_, _, err := getDemoClient()
-//	assert.Nil(t, err)
-//}
-
 // getDemoClient builds a new client and retrieves an access token for the demo user.
 func getDemoClient() (*withings.Client, *withings.AccessToken, error) {
 	// Building and validating the URL before testing the actual method.
@@ -187,6 +179,40 @@ func TestClient_GetMeasure(t *testing.T) {
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
 			resp, err := client.GetMeasure(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+		})
+	}
+
+}
+
+func TestClient_GetActivity(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param                 withings.GetActivityParam
+		status                int64
+		expectedFirstResult   withings.Activity
+		expectedGroupCount    int
+		expectedTotalMeasures int
+	}{
+		"Retrieve unbound weights only": {
+			param: withings.GetActivityParam{
+				LastUpdate: time.Now().Add(-24 * time.Hour),
+			},
+		},
+		//"Retrieve unbound all measurements": {
+		//	param: withings.GetMeasureParam{},
+		//},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetActivity(context.Background(), *demoToken, test.param)
 			require.Nil(t, err)
 			require.Equal(t, int64(0), resp.Status)
 		})
