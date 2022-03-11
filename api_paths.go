@@ -7,4 +7,5 @@ const (
 	APIPathGetV2Measure    = "https://wbsapi.withings.net/v2/measure"
 	APIHeartV2             = "https://wbsapi.withings.net/v2/heart"
 	APISleepV2             = "https://wbsapi.withings.net/v2/sleep"
+	APINotify              = "https://wbsapi.withings.net/notify"
 )

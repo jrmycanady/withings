@@ -19,14 +19,19 @@ const (
 )
 
 const (
-	APIActionGetMeasure          = "getmeas"
-	APIActionGetActivity         = "getactivity"
-	APIActionGetIntraDayActivity = "getintradayactivity"
-	APIActionGetWorkout          = "getworkouts"
-	APIActionGetHeartList        = "list"
-	APIActionGetHeartGet         = "get"
-	APIActionGetSleep            = "get"
-	APIActionGetSleepSummary     = "getsummary"
+	APIActionGetMeasure            = "getmeas"
+	APIActionGetActivity           = "getactivity"
+	APIActionGetIntraDayActivity   = "getintradayactivity"
+	APIActionGetWorkout            = "getworkouts"
+	APIActionGetHeartList          = "list"
+	APIActionGetHeartGet           = "get"
+	APIActionGetSleep              = "get"
+	APIActionGetSleepSummary       = "getsummary"
+	APIActionNotificationSubscribe = "subscribe"
+	APIActionNotificationGet       = "get"
+	APIActionNotificationList      = "list"
+	APIActionNotificationRevoke    = "revoke"
+	APIActionNotificationUpdate    = "update"
 )
 
 type Client struct {
@@ -52,6 +57,11 @@ type Client struct {
 
 	// Denotes the client should run in demo mode.
 	demoMode bool
+}
+
+// RedirectURL provides the redirect URL the client is configured for. It cannot be changed once the client is created.
+func (c *Client) RedirectURL() url.URL {
+	return c.redirectURL
 }
 
 func NewClient(clientID string, clientSecret string, redirectURL url.URL, opts ...ClientOption) *Client {
