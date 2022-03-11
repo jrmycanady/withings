@@ -307,3 +307,63 @@ func TestClient_GetHeartData(t *testing.T) {
 	}
 
 }
+
+func TestClient_GetSleep(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param  withings.GetSleepParam
+		status int64
+	}{
+		"Retrieve unbound": {
+			param: withings.GetSleepParam{
+				StartDate: time.Now().Add(-300 * time.Hour),
+				EndDate:   time.Now(),
+				DataFields: withings.SleepDataFields{
+					withings.SleepDataFieldRR,
+				},
+			},
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetSleep(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+			assert.Greater(t, len(resp.Body.Series), 0)
+		})
+	}
+
+}
+
+func TestClient_GetSleepSummary(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param  withings.GetSleepSummaryParam
+		status int64
+	}{
+		"Retrieve unbound": {
+			param: withings.GetSleepSummaryParam{},
+		},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetSleepSummary(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+			assert.Greater(t, len(resp.Body.Series), 0)
+		})
+	}
+
+}

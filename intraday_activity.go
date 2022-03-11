@@ -39,18 +39,18 @@ const (
 
 // IntraDayActivity is record of high frequency activity data.
 type IntraDayActivity struct {
-	DeviceID  string  `json:"deviceid"`
-	Model     string  `json:"model"`
-	ModelID   int     `json:"model_id"`
-	Steps     float64 `json:"steps"`
-	Elevation float64 `json:"elevation"`
-	Calories  float64 `json:"calories"`
-	Distance  float64 `json:"distance"`
-	Stroke    float64 `json:"stroke"`
-	PoolLap   float64 `json:"pool_lap"`
-	Duration  float64 `json:"duration"`
-	HeartRate float64 `json:"heart_rate"`
-	Spo2Auto  float64 `json:"spo2_auto"`
+	DeviceID  string   `json:"deviceid"`
+	Model     string   `json:"model"`
+	ModelID   int      `json:"model_id"`
+	Steps     *float64 `json:"steps"`
+	Elevation *float64 `json:"elevation"`
+	Calories  *float64 `json:"calories"`
+	Distance  *float64 `json:"distance"`
+	Stroke    *float64 `json:"stroke"`
+	PoolLap   *float64 `json:"pool_lap"`
+	Duration  *float64 `json:"duration"`
+	HeartRate *float64 `json:"heart_rate"`
+	Spo2Auto  *float64 `json:"spo2_auto"`
 }
 
 // IntraDayActivities is a map of IntraDayActivities indexed by their timestamp.

@@ -67,26 +67,26 @@ type Workouts []Workout
 
 // WorkoutData is the data of a workout as defined by the Withings API.
 type WorkoutData struct {
-	AlgoPauseDuration float64 `json:"algo_pause_duration"`
-	Calories          float64 `json:"calories"`
-	Distance          float64 `json:"distance"`
-	Elevation         float64 `json:"elevation"`
-	HrAverage         float64 `json:"hr_average"`
-	HrMax             float64 `json:"hr_max"`
-	HrMin             float64 `json:"hr_min"`
-	HrZone0           float64 `json:"hr_zone_0"`
-	HrZone1           float64 `json:"hr_zone_1"`
-	HrZone2           float64 `json:"hr_zone_2"`
-	HrZone3           float64 `json:"hr_zone_3"`
-	Intensity         float64 `json:"intensity"`
-	ManualCalories    float64 `json:"manual_calories"`
-	ManualDistance    float64 `json:"manual_distance"`
-	PauseDuration     float64 `json:"pause_duration"`
-	PoolLaps          float64 `json:"pool_laps"`
-	PoolLength        float64 `json:"pool_length"`
-	Spo2Average       float64 `json:"spo2_average"`
-	Steps             float64 `json:"steps"`
-	Strokes           float64 `json:"strokes"`
+	AlgoPauseDuration *float64 `json:"algo_pause_duration"`
+	Calories          *float64 `json:"calories"`
+	Distance          *float64 `json:"distance"`
+	Elevation         *float64 `json:"elevation"`
+	HrAverage         *float64 `json:"hr_average"`
+	HrMax             *float64 `json:"hr_max"`
+	HrMin             *float64 `json:"hr_min"`
+	HrZone0           *float64 `json:"hr_zone_0"`
+	HrZone1           *float64 `json:"hr_zone_1"`
+	HrZone2           *float64 `json:"hr_zone_2"`
+	HrZone3           *float64 `json:"hr_zone_3"`
+	Intensity         *float64 `json:"intensity"`
+	ManualCalories    *float64 `json:"manual_calories"`
+	ManualDistance    *float64 `json:"manual_distance"`
+	PauseDuration     *float64 `json:"pause_duration"`
+	PoolLaps          *float64 `json:"pool_laps"`
+	PoolLength        *float64 `json:"pool_length"`
+	Spo2Average       *float64 `json:"spo2_average"`
+	Steps             *float64 `json:"steps"`
+	Strokes           *float64 `json:"strokes"`
 }
 
 // GetWorkoutResp is the response type returned by the Withings API for are request for workout data.

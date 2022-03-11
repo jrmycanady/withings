@@ -46,28 +46,28 @@ const (
 
 // Activity is an activity as defined by the Withings API.
 type Activity struct {
-	Date          string  `json:"date"`
-	Timezone      string  `json:"timezone"`
-	DeviceID      string  `json:"deviceid"`
-	HashDeviceID  string  `json:"hash_deviceid"`
-	Brand         float64 `json:"brand"`
-	IsTracker     bool    `json:"is_tracker"`
-	Steps         float64 `json:"steps"`
-	Distance      float64 `json:"distance"`
-	Elevation     float64 `json:"elevation"`
-	Soft          float64 `json:"soft"`
-	Moderate      float64 `json:"moderate"`
-	Intense       float64 `json:"intense"`
-	Active        float64 `json:"active"`
-	Calories      float64 `json:"calories"`
-	TotalCalories float64 `json:"totalcalories"`
-	HrAverage     float64 `json:"hr_average"`
-	HrMin         float64 `json:"hr_min"`
-	HrMax         float64 `json:"hr_max"`
-	HrZone0       float64 `json:"hr_zone_0"`
-	HrZone1       float64 `json:"hr_zone_1"`
-	HrZone2       float64 `json:"hr_zone_2"`
-	HrZone3       float64 `json:"hr_zone_3"`
+	Date          string   `json:"date"`
+	Timezone      string   `json:"timezone"`
+	DeviceID      string   `json:"deviceid"`
+	HashDeviceID  string   `json:"hash_deviceid"`
+	Brand         float64  `json:"brand"`
+	IsTracker     bool     `json:"is_tracker"`
+	Steps         *float64 `json:"steps"`
+	Distance      *float64 `json:"distance"`
+	Elevation     *float64 `json:"elevation"`
+	Soft          *float64 `json:"soft"`
+	Moderate      *float64 `json:"moderate"`
+	Intense       *float64 `json:"intense"`
+	Active        *float64 `json:"active"`
+	Calories      *float64 `json:"calories"`
+	TotalCalories *float64 `json:"totalcalories"`
+	HrAverage     *float64 `json:"hr_average"`
+	HrMin         *float64 `json:"hr_min"`
+	HrMax         *float64 `json:"hr_max"`
+	HrZone0       *float64 `json:"hr_zone_0"`
+	HrZone1       *float64 `json:"hr_zone_1"`
+	HrZone2       *float64 `json:"hr_zone_2"`
+	HrZone3       *float64 `json:"hr_zone_3"`
 }
 
 // Activities is a slice of Activity structs as defined by the Withings API.

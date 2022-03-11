@@ -25,6 +25,8 @@ const (
 	APIActionGetWorkout          = "getworkouts"
 	APIActionGetHeartList        = "list"
 	APIActionGetHeartGet         = "get"
+	APIActionGetSleep            = "get"
+	APIActionGetSleepSummary     = "getsummary"
 )
 
 type Client struct {
