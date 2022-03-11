@@ -16,6 +16,7 @@ import (
 const (
 	ScopeUserActivity = "user.activity"
 	ScopeUserMetrics  = "user.metrics"
+	ScopeUserDevice   = "user.device"
 )
 
 const (
@@ -32,6 +33,7 @@ const (
 	APIActionNotificationList      = "list"
 	APIActionNotificationRevoke    = "revoke"
 	APIActionNotificationUpdate    = "update"
+	APIActionUserGetDevice         = "getdevice"
 )
 
 type Client struct {

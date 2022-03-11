@@ -145,7 +145,12 @@ func getDemoClient() (*withings.Client, *withings.AccessToken, error) {
 
 func init() {
 	// Generating the demo client and token. All tests should check these before proceeding with testing.
-	client, demoToken, _ = getDemoClient()
+	var err error
+	client, demoToken, err = getDemoClient()
+	if err != nil {
+		panic(err)
+	}
+
 }
 
 func timePtr(t time.Time) *time.Time {
@@ -447,6 +452,34 @@ func TestClient_ListNotification(t *testing.T) {
 			resp, err := client.ListNotification(context.Background(), *demoToken, test.param)
 			require.Nil(t, err)
 			require.Equal(t, int64(0), resp.Status)
+		})
+	}
+
+}
+
+func TestClient_GetUserDevice(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		status int64
+	}{
+		"Retrieve": {},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			resp, err := client.GetUserDevice(context.Background(), *demoToken)
+
+			switch test.status {
+			case 0:
+				require.Nil(t, err)
+				require.Equal(t, int64(0), resp.Status)
+			}
+
 		})
 	}
 

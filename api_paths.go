@@ -8,4 +8,5 @@ const (
 	APIHeartV2             = "https://wbsapi.withings.net/v2/heart"
 	APISleepV2             = "https://wbsapi.withings.net/v2/sleep"
 	APINotify              = "https://wbsapi.withings.net/notify"
+	APIUser                = "https://wbsapi.withings.net/v2/user"
 )

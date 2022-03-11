@@ -15,7 +15,7 @@ var csrfRegex = regexp.MustCompile(`.*csrf_token.*value="(.*)"`)
 // GetDemoAccessToken creates an auth request for the demo user and obtains a valid access token. This is used
 // for testing purposes.
 func (c *Client) GetDemoAccessToken() (*AccessTokenResponse, error) {
-	authReqURL, _, err := c.GetUserAuthRequestURL([]string{ScopeUserMetrics, ScopeUserActivity}, "")
+	authReqURL, _, err := c.GetUserAuthRequestURL([]string{ScopeUserMetrics, ScopeUserActivity, ScopeUserDevice}, "")
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate request URL: %s", err)
 	}
