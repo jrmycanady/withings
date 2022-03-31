@@ -76,8 +76,6 @@ func (c *Client) GetDemoAccessToken() (*AccessTokenResponse, error) {
 		code = postResp.Request.URL.Query().Get("code")
 	}
 
-	fmt.Println(code)
-
 	acessToken, err := c.GetUserAccessToken(code)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get access token with code: %s", err)

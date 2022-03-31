@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"bytes"
+	"github.com/jrmycanady/withings"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
-	"withings"
 )
 
 func TestExecute_Root(t *testing.T) {

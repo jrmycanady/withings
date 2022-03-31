@@ -1,6 +1,6 @@
 package main
 
-import "withings/gowithings/cmd"
+import "github.com/jrmycanady/withings/gowithings/cmd"
 
 func main() {
 	cmd.Execute()

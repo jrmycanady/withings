@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -165,7 +166,7 @@ type AccessTokenResponse struct {
 	AccessToken AccessToken `json:"body"`
 }
 type AccessToken struct {
-	UserID       int64     `json:"userid"`
+	UserID       string    `json:"userid"`
 	AccessToken  string    `json:"access_token"`
 	RefreshToken string    `json:"refresh_token"`
 	ExpiresIn    int64     `json:"expires_in"`
@@ -191,6 +192,9 @@ func (c *Client) GetUserAccessToken(authCode string) (*AccessTokenResponse, erro
 	formData.Set("grant_type", "authorization_code")
 	formData.Set("code", authCode)
 	formData.Set("redirect_uri", c.redirectURL.String())
+
+	fmt.Printf("code: %s\n", authCode)
+	fmt.Println(formData.Encode())
 
 	req, err := http.NewRequest(http.MethodPost, APIPathUserAccessToken, strings.NewReader(formData.Encode()))
 	if err != nil {
@@ -244,6 +248,7 @@ func (c *Client) RefreshAccessToken(token AccessToken) (*AccessTokenResponse, er
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
+	log.Println(string(body))
 	if err != nil {
 		return nil, fmt.Errorf("failed to read body: %s", err)
 	}

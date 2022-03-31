@@ -2,11 +2,11 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/jrmycanady/withings"
 	"github.com/spf13/cobra"
 	"log"
 	"net/url"
 	"strings"
-	"withings"
 )
 
 var authGenerateRequestURLCmdVars = struct {
@@ -45,7 +45,6 @@ var authGenerateRequestURLCmd = &cobra.Command{
 }
 
 func init() {
-	authGenerateRequestURLCmd.Flags().StringVarP(&authGenerateRequestURLCmdVars.redirectURL, "redirect-url", "u", "", "The URL the Withings API should redirect back to.")
 	authGenerateRequestURLCmd.Flags().StringVar(&authGenerateRequestURLCmdVars.scopes, "scopes", "user.activity,user.metrics", "Comma separated list of scopes that will be requested for access.")
 	authGenerateRequestURLCmd.Flags().StringVar(&authGenerateRequestURLCmdVars.redirectURL, "state", "", "An optional state value the will be returned by the Withings API to prevent spoofing.")
 	authGenerateRequestURLCmd.MarkFlagRequired("redirect-url")

@@ -25,6 +25,8 @@ func Execute() {
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&ConfigOptions.ClientID, "client-id", "i", "", "The client id provided by Withings for the client.")
 	rootCmd.PersistentFlags().StringVarP(&ConfigOptions.ClientSecret, "client-secret", "s", "", "The client secret provided by Withings for the client.")
+	rootCmd.PersistentFlags().StringVarP(&authGenerateRequestURLCmdVars.redirectURL, "redirect-url", "u", "", "The URL the Withings API should redirect back to.")
+
 	rootCmd.PersistentFlags().BoolVar(&ConfigOptions.SkipCertificateVerification, "skip-certificate-verification", false, "The client secret provided by Withings for the client.")
 	rootCmd.PersistentFlags().BoolVar(&ConfigOptions.Demo, "demo-mode", false, "Denotes if all API calls should use demo mode.")
 }
