@@ -165,12 +165,17 @@ type AccessTokenResponse struct {
 	AccessToken AccessToken `json:"body"`
 }
 type AccessToken struct {
-	UserID       int64  `json:"userid"`
-	AccessToken  string `json:"access_token"`
-	RefreshToken string `json:"refresh_token"`
-	ExpiresIn    int64  `json:"expires_in"`
-	CSRFToken    string `json:"csrf_token"`
-	TokenType    string `json:"token_type"`
+	UserID       int64     `json:"userid"`
+	AccessToken  string    `json:"access_token"`
+	RefreshToken string    `json:"refresh_token"`
+	ExpiresIn    int64     `json:"expires_in"`
+	ExpiresAt    time.Time `json:"expires_at"`
+	CSRFToken    string    `json:"csrf_token"`
+	TokenType    string    `json:"token_type"`
+}
+
+func (a *AccessTokenResponse) SetExpires(t time.Time) {
+	a.AccessToken.ExpiresAt = t.Add(time.Duration(a.AccessToken.ExpiresIn) * time.Second)
 }
 
 // GetUserAccessToken retrieves a new user access token using the AuthCode provided. The authCode is provided by the
@@ -193,6 +198,7 @@ func (c *Client) GetUserAccessToken(authCode string) (*AccessTokenResponse, erro
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
+	requestTime := time.Now()
 	resp, err := c.HttpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to send request: %s", err)
@@ -209,6 +215,47 @@ func (c *Client) GetUserAccessToken(authCode string) (*AccessTokenResponse, erro
 		if err = json.Unmarshal(body, &accessToken); err != nil {
 			return nil, fmt.Errorf("failed to parse response: %s", err)
 		}
+		accessToken.SetExpires(requestTime)
+		return &accessToken, nil
+	default:
+		return nil, fmt.Errorf("failed with API error")
+	}
+}
+
+func (c *Client) RefreshAccessToken(token AccessToken) (*AccessTokenResponse, error) {
+	// Building required form data for the request.
+	formData := url.Values{}
+	formData.Set("action", "requesttoken")
+	formData.Set("client_id", c.clientID)
+	formData.Set("client_secret", c.clientSecret)
+	formData.Set("grant_type", "refresh_token")
+	formData.Set("refresh_token", token.RefreshToken)
+
+	req, err := http.NewRequest(http.MethodPost, APIPathUserAccessToken, strings.NewReader(formData.Encode()))
+	if err != nil {
+		return nil, fmt.Errorf("failed to build request: %s", err)
+	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	requestTime := time.Now()
+	resp, err := c.HttpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to send request: %s", err)
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read body: %s", err)
+	}
+
+	switch resp.StatusCode {
+	case http.StatusOK:
+		var accessToken AccessTokenResponse
+		if err = json.Unmarshal(body, &accessToken); err != nil {
+			return nil, fmt.Errorf("failed to parse response: %s", err)
+		}
+
+		accessToken.SetExpires(requestTime)
 		return &accessToken, nil
 	default:
 		return nil, fmt.Errorf("failed with API error")

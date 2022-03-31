@@ -110,8 +110,7 @@ func (p *GetNotificationParam) UpdateQuery(q url.Values) url.Values {
 	return q
 }
 
-// SubscribeToNotifications subscribes to receiving notifications for various events. If the subscription is successful
-// the error will be nil.
+// GetNotification gets a single notification configuration.
 func (c *Client) GetNotification(ctx context.Context, token AccessToken, param GetNotificationParam) (*GetNotificationResp, error) {
 
 	// Construct authorized request to request data from the API.
@@ -151,7 +150,7 @@ func (c *Client) GetNotification(ctx context.Context, token AccessToken, param G
 // ListNotificationParam is the parameter needed to list the notification configuration for the user.
 type ListNotificationParam struct {
 	// The notification category. Please see the API for the proper values.
-	Appli int
+	Appli int `json:"appli"`
 }
 
 // ListNotificationResp is the response type returned by the Withings API when getting a notification.

@@ -372,63 +372,6 @@ func TestClient_GetSleepSummary(t *testing.T) {
 
 }
 
-func TestClient_SubscribeToNotifications(t *testing.T) {
-	t.Parallel()
-
-	// Verify init succeeded.
-	require.NotNil(t, client)
-	require.NotNil(t, demoToken)
-
-	tests := map[string]struct {
-		param  withings.SubscribeToNotificationsParam
-		status int64
-	}{
-		"Retrieve unbound": {
-			param: withings.SubscribeToNotificationsParam{
-				CallbackURL: client.RedirectURL(),
-				Appli:       1,
-			},
-		},
-	}
-
-	for name, test := range tests {
-		t.Run(name, func(t *testing.T) {
-			resp, err := client.SubscribeToNotifications(context.Background(), *demoToken, test.param)
-			require.Nil(t, err)
-			require.Equal(t, int64(0), resp.Status)
-		})
-	}
-}
-
-func TestClient_GetNotification(t *testing.T) {
-	t.Parallel()
-
-	// Verify init succeeded.
-	require.NotNil(t, client)
-	require.NotNil(t, demoToken)
-
-	tests := map[string]struct {
-		param  withings.GetNotificationParam
-		status int64
-	}{
-		"Retrieve unbound": {
-			param: withings.GetNotificationParam{
-				Appli:       1,
-				CallbackURL: client.RedirectURL(),
-			},
-		},
-	}
-
-	for name, test := range tests {
-		t.Run(name, func(t *testing.T) {
-			resp, err := client.GetNotification(context.Background(), *demoToken, test.param)
-			require.Nil(t, err)
-			require.Equal(t, int64(0), resp.Status)
-		})
-	}
-
-}
-
 func TestClient_ListNotification(t *testing.T) {
 	t.Parallel()
 
@@ -457,7 +400,7 @@ func TestClient_ListNotification(t *testing.T) {
 
 }
 
-func TestClient_GetUserDevice(t *testing.T) {
+func TestClient_GetMeasureWithRefreshedToken(t *testing.T) {
 	t.Parallel()
 
 	// Verify init succeeded.
@@ -465,21 +408,67 @@ func TestClient_GetUserDevice(t *testing.T) {
 	require.NotNil(t, demoToken)
 
 	tests := map[string]struct {
-		status int64
+		param                 withings.GetMeasureParam
+		status                int64
+		expectedFirstResult   withings.MeasureGroup
+		expectedGroupCount    int
+		expectedTotalMeasures int
 	}{
-		"Retrieve": {},
+		"Retrieve unbound weights only": {
+			param: withings.GetMeasureParam{
+				MeasurementTypes: withings.MeasureTypes{withings.MeasureTypeWeightKilogram},
+			},
+		},
+		//"Retrieve unbound all measurements": {
+		//	param: withings.GetMeasureParam{},
+		//},
 	}
 
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
-			resp, err := client.GetUserDevice(context.Background(), *demoToken)
+			refreshResult, err := client.RefreshAccessToken(*demoToken)
+			require.Nil(t, err)
+			demoToken = &refreshResult.AccessToken
+			resp, err := client.GetMeasure(context.Background(), *demoToken, test.param)
+			require.Nil(t, err)
+			require.Equal(t, int64(0), resp.Status)
+		})
+	}
 
-			switch test.status {
-			case 0:
-				require.Nil(t, err)
-				require.Equal(t, int64(0), resp.Status)
-			}
+}
 
+func TestAuthorizedUser_GetMeasure(t *testing.T) {
+	t.Parallel()
+
+	// Verify init succeeded.
+	require.NotNil(t, client)
+	require.NotNil(t, demoToken)
+
+	tests := map[string]struct {
+		param                 withings.GetMeasureParam
+		status                int64
+		expectedFirstResult   withings.MeasureGroup
+		expectedGroupCount    int
+		expectedTotalMeasures int
+	}{
+		"Retrieve unbound weights only": {
+			param: withings.GetMeasureParam{
+				MeasurementTypes: withings.MeasureTypes{withings.MeasureTypeWeightKilogram},
+			},
+		},
+		//"Retrieve unbound all measurements": {
+		//	param: withings.GetMeasureParam{},
+		//},
+	}
+
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			u := client.NewAuthorizedUser(*demoToken)
+
+			resp, token, err := u.GetMeasure(context.Background(), test.param)
+			require.Nil(t, err)
+			require.Nil(t, token)
+			require.Equal(t, int64(0), resp.Status)
 		})
 	}
 
