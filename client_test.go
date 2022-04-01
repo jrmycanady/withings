@@ -3,6 +3,7 @@ package withings_test
 import (
 	"context"
 	"fmt"
+	"github.com/jrmycanady/withings"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"net/http"
@@ -10,7 +11,6 @@ import (
 	"os"
 	"testing"
 	"time"
-	"withings"
 )
 
 // client contains the test client configured on init.
