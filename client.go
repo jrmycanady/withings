@@ -166,13 +166,13 @@ type AccessTokenResponse struct {
 	AccessToken AccessToken `json:"body"`
 }
 type AccessToken struct {
-	UserID       int64     `json:"userid"`
-	AccessToken  string    `json:"access_token"`
-	RefreshToken string    `json:"refresh_token"`
-	ExpiresIn    int64     `json:"expires_in"`
-	ExpiresAt    time.Time `json:"expires_at"`
-	CSRFToken    string    `json:"csrf_token"`
-	TokenType    string    `json:"token_type"`
+	UserID       interface{} `json:"userid"`
+	AccessToken  string      `json:"access_token"`
+	RefreshToken string      `json:"refresh_token"`
+	ExpiresIn    int64       `json:"expires_in"`
+	ExpiresAt    time.Time   `json:"expires_at"`
+	CSRFToken    string      `json:"csrf_token"`
+	TokenType    string      `json:"token_type"`
 }
 
 func (a *AccessTokenResponse) SetExpires(t time.Time) {
