@@ -166,7 +166,7 @@ type AccessTokenResponse struct {
 	AccessToken AccessToken `json:"body"`
 }
 type AccessToken struct {
-	UserID       interface{} `json:"userid"`
+	UserID       interface{} `json:"-"`
 	AccessToken  string      `json:"access_token"`
 	RefreshToken string      `json:"refresh_token"`
 	ExpiresIn    int64       `json:"expires_in"`

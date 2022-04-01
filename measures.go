@@ -179,7 +179,7 @@ func (m *Measure) ToHeight(group *MeasureGroup) *HeightMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -228,7 +228,7 @@ func (m *Measure) ToFatFreeMass(group *MeasureGroup) *FatFreeMassMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -275,7 +275,7 @@ func (m *Measure) ToFatRatio(group *MeasureGroup) *FatRatioMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -324,7 +324,7 @@ func (m *Measure) ToFatMassWeight(group *MeasureGroup) *FatMassWeightMeasurement
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -371,7 +371,7 @@ func (m *Measure) ToDiastolicBloodPressure(group *MeasureGroup) *DiastolicBloodP
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -418,7 +418,7 @@ func (m *Measure) ToSystolicBloodPressure(group *MeasureGroup) *SystolicBloodPre
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -465,7 +465,7 @@ func (m *Measure) ToHeartPulse(group *MeasureGroup) *HeartPulseMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -514,7 +514,7 @@ func (m *Measure) ToTemperature(group *MeasureGroup) *TemperatureMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -561,7 +561,7 @@ func (m *Measure) ToSPO2(group *MeasureGroup) *SPO2Measurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -610,7 +610,7 @@ func (m *Measure) ToBodyTemperature(group *MeasureGroup) *BodyTemperatureMeasure
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -659,7 +659,7 @@ func (m *Measure) ToSkinTemperature(group *MeasureGroup) *SkinTemperatureMeasure
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -708,7 +708,7 @@ func (m *Measure) ToMuscleMass(group *MeasureGroup) *MuscleMassMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -757,7 +757,7 @@ func (m *Measure) ToHydration(group *MeasureGroup) *HydrationMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -806,7 +806,7 @@ func (m *Measure) ToBoneMass(group *MeasureGroup) *BoneMassMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -853,7 +853,7 @@ func (m *Measure) ToPulseWaveVelocity(group *MeasureGroup) *PulseWaveVelocityMea
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -900,7 +900,7 @@ func (m *Measure) ToVo2Max(group *MeasureGroup) *Vo2MaxMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -947,7 +947,7 @@ func (m *Measure) ToQRS(group *MeasureGroup) *QRSMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -994,7 +994,7 @@ func (m *Measure) ToPR(group *MeasureGroup) *PRMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -1041,7 +1041,7 @@ func (m *Measure) ToQT(group *MeasureGroup) *QTMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -1088,7 +1088,7 @@ func (m *Measure) ToCorrectedQT(group *MeasureGroup) *CorrectedQTMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
@@ -1135,7 +1135,7 @@ func (m *Measure) ToAfibResult(group *MeasureGroup) *AfibResultMeasurement {
 	}
 
 	if group != nil {
-		w.Created = time.UnixMilli(group.Created)
+		w.Created = time.Unix(group.Created, 0)
 		w.DeviceID = group.DeviceID
 		w.GroupID = group.GroupID
 	}
